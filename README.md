@@ -1,1 +1,13 @@
-xyz
+- during ordinary pretraining, the model autoregressively outputs tokens on which we calculate crossentropy against the correct token for each sequence position.
+- the idea was to add a bunch of extra tokens to the models vocab.
+- these tokens would be *ignored* when they are output during training. We continue spitting out tokens until we have produced as many 'real' tokens as were in the output sequence, ignoring all the extra 'thinking' tokens.
+- During training, the model will receive no supervised feedback whatsoever when a thinking token is output.
+- Instead, we include another loss term to the total loss for a sequence. The loss of a particular invisible token is a function of the ordinary, supervised loss for all the ordinary tokens which were output later.
+- So the reward signal for normal tokens is simply to correctly predict the next token, like a normal model, except there are invisible tokens in the sequence which weren't part of the input sequence.
+- The reward signal for the invisible tokens is the loss of all following real tokens.
+- So we encourage the model to output normal tokens which are the same as the actual next token, and to output invisible tokens which increase the chance of outputting the correct prediction for the next token.
+- It would also be probably necessary to apply a fixed cost for outputting invisible tokens to get it to eventually output real token predictions instead of 'thinking forever.'
+- The idea is to allow the model to think, but not out loud. To be able to output intermediate results of unconstrained semantic meaning, and to do this for as many tokens as required.
+- but like one of the main, possibly THE main strength of transformers (over RNNs certainly,) is that they are  so wonderfully parallel to train.
+- so doing pretraining like inference generation, as this method would require, legit takes the parallelism out back behind the barn with a shotgun.
+- The training code I have here doesnt work and hurt me to write.
