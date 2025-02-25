@@ -1,5 +1,4 @@
 import os, time, random, datasets, wandb, functools
-wandb.require("core")
 from tqdm import trange, tqdm
 from dataclasses import dataclass
 from typing import *

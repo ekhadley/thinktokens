@@ -54,7 +54,7 @@ class tblock(nn.Module):
         super().__init__()
         self.cfg, self.targs = cfg, targs
         self.ln1 = nn.LayerNorm((cfg.d_model))
-        self.attn = nn.MultiheadAttention(cfg.d_model, cfg.n_heads, batch_first=True)
+        self.attn = nn.MultiheadAttention(cfg.d_model, cfg.n_heads, batch_first=True, )
         self.ln2 = nn.LayerNorm((cfg.d_model))
         self.mlp1 = nn.Linear(cfg.d_model, cfg.d_mlp)
         self.act = nn.GELU()

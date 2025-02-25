@@ -3,7 +3,6 @@ import train_normal
 MAIN = __name__ == "__main__"
 
 device = t.device("cuda" if t.cuda.is_available() else "cpu")
-#device = t.device("cpu" if t.cuda.is_available() else "cpu")
 if MAIN: print(bold, red, underline, f"device set to {device}", endc)
 os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = "1"
 
